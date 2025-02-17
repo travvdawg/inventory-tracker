@@ -2,39 +2,43 @@ import hardwareImg from '../assets/Hardware.png';
 import coursesImg from '../assets/Courses.jpg';
 import harnessesImg from '../assets/Harnesses.png';
 import woodImg from '../assets/Wood.jpg';
+import { Link } from 'react-router';
 
 function LinkCard() {
 	return (
 		<div>
 			<div className='card-container'>
-				<a href=''>
+				<Link to='/hardware'>
 					<img
 						src={hardwareImg}
 						alt='Hardware'
 						className='cardImg'
 					/>
-				</a>
-				<a href=''>
+				</Link>
+
+				<Link to='/courses'>
 					<img
 						src={coursesImg}
-						alt='Hardware'
+						alt='Courses'
 						className='cardImg'
 					/>
-				</a>
-				<a href=''>
+				</Link>
+
+				<Link to='/harnesses'>
 					<img
 						src={harnessesImg}
-						alt='Hardware'
+						alt='Harnesses'
 						className='cardImg'
 					/>
-				</a>
-				<a href=''>
+				</Link>
+
+				<Link to='/wood'>
 					<img
 						src={woodImg}
-						alt='Hardware'
+						alt='Wood'
 						className='cardImg'
 					/>
-				</a>
+				</Link>
 			</div>
 		</div>
 	);

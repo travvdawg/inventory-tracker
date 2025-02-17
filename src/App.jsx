@@ -1,22 +1,39 @@
-// import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import LinkCard from './components/LinkCard';
 import Harnesses from './pages/Harnesses';
-import { BrowserRouter as Router, Route, Routes } from 'react-router';
+import Hardware from './pages/Hardware';
+import Wood from './pages/Wood';
+import Courses from './pages/Courses';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 function App() {
 	return (
-		<Router>
+		<BrowserRouter>
 			<Navbar />
-			<LinkCard />
 			<Routes>
+				<Route
+					path='/'
+					element={<LinkCard />}
+				/>
 				<Route
 					path='/harnesses'
 					element={<Harnesses />}
 				/>
+				<Route
+					path='/wood'
+					element={<Wood />}
+				/>
+				<Route
+					path='/hardware'
+					element={<Hardware />}
+				/>
+				<Route
+					path='/courses'
+					element={<Courses />}
+				/>
 			</Routes>
-		</Router>
+		</BrowserRouter>
 	);
 }
 

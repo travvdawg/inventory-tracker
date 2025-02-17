@@ -1,30 +1,32 @@
+import { Link } from 'react-router';
+
 function Navbar() {
 	return (
 		<div>
 			<nav className='navbar'>
 				<div className='nav-left'>
-					<a
-						href=''
+					<Link
+						to='/'
 						className='logo'>
 						<img
 							src='https://www.orlandotreetrek.com/wp-content/uploads/2019/11/orlando-tree-trek-logo.png'
 							alt='OTTAP logo'
 						/>
-					</a>
+					</Link>
 				</div>
 				<div className='nav-right'>
 					<ul className='nav-items'>
 						<li>
-							<a href=''>Harnesses</a>
+							<Link to='/harnesses'>Harnesses</Link>
 						</li>
 						<li>
-							<a href=''>Wood</a>
+							<Link to='/wood'>Wood</Link>
 						</li>
 						<li>
-							<a href=''>Courses</a>
+							<Link to='/courses'>Courses</Link>
 						</li>
 						<li>
-							<a href=''>Hardware</a>
+							<Link to='/hardware'>Hardware</Link>
 						</li>
 					</ul>
 				</div>
