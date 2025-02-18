@@ -5,6 +5,8 @@ import Harnesses from './pages/Harnesses';
 import Hardware from './pages/Hardware';
 import Wood from './pages/Wood';
 import Courses from './pages/Courses';
+import Inspections from './pages/InspectionSheets';
+import Supplies from './pages/Supplies';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 function App() {
@@ -31,6 +33,14 @@ function App() {
 				<Route
 					path='/courses'
 					element={<Courses />}
+				/>
+				<Route
+					path='/inspections'
+					element={<Inspections />}
+				/>
+				<Route
+					path='/supplies'
+					element={<Supplies />}
 				/>
 			</Routes>
 		</BrowserRouter>
