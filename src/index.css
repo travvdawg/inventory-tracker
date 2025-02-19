@@ -96,6 +96,26 @@ h1 {
 	margin: 1rem 0;
 }
 
+.customOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.customModal {
+	background-color: #24242469;
+	width: 400px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+	outline: none;
+	padding: 20px;
+}
+
 .cardImg:hover {
 	box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.425);
 }
