@@ -1,6 +1,10 @@
 import { Link } from 'react-router';
+import { useState } from 'react';
+import Hamburger from 'hamburger-react';
 
 function Navbar() {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<div>
 			<nav className='navbar'>
@@ -15,7 +19,13 @@ function Navbar() {
 					</Link>
 				</div>
 				<div className='nav-right'>
-					<ul className='nav-items'>
+					<div className='hamburger-menu'>
+						<Hamburger
+							toggled={isOpen}
+							toggle={setIsOpen}
+						/>
+					</div>
+					<ul className={`nav-items ${isOpen ? 'active' : ''}`}>
 						<li>
 							<Link to='/harnesses'>Harnesses</Link>
 						</li>

@@ -51,12 +51,24 @@ h1 {
 	padding: 10px;
 }
 
-.nav-items {
+.hamburger-menu {
+	display: none;
+	cursor: pointer;
+	z-index: 10;
+}
+
+.nav-right {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	flex-direction: row;
-	margin-right: 2rem;
+	position: relative;
+}
+
+.nav-items {
+	display: flex;
+}
+
+.nav-items.active {
+	display: flex;
 }
 
 .nav-items li {
@@ -130,5 +142,48 @@ h1 {
 	}
 	button {
 		background-color: #f9f9f9;
+	}
+}
+
+@media (max-width: 900px) {
+	.hamburger-menu {
+		display: flex;
+	}
+
+	.nav-right {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		position: relative;
+	}
+
+	.nav-items {
+		display: none;
+		flex-direction: column;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background: #2c2c2c;
+		width: 200px;
+		text-align: right;
+		padding: 1rem;
+		border-radius: 10px;
+		box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+	}
+
+	.nav-items.active {
+		display: flex;
+	}
+}
+
+@media (max-width: 800px) {
+	.cardImg {
+		height: 200px;
+	}
+}
+
+@media (max-width: 650px) {
+	.cardImg {
+		height: 150px;
 	}
 }
