@@ -132,6 +132,47 @@ h1 {
 	box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.425);
 }
 
+.ropes,
+.harness,
+.courses,
+.hardware,
+.wood {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	width: 100vw;
+}
+
+.ropes h2,
+.harness h2,
+.wood,
+.courses h2,
+.hardware h2 {
+	padding: 1rem;
+	margin: 1rem;
+	height: 600px;
+	width: 300px;
+	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.068);
+}
+
+.task-list {
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.task-list h1 {
+	height: 80vh;
+	width: 80vw;
+	background-color: rgba(255, 255, 255, 0.13);
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-radius: 15px;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

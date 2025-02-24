@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { useState } from 'react';
 import Hamburger from 'hamburger-react';
+import Ropes from '../pages/Ropes';
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +38,9 @@ function Navbar() {
 						</li>
 						<li>
 							<Link to='/hardware'>Hardware</Link>
+						</li>
+						<li>
+							<Link to='/ropes'>Ropes</Link>
 						</li>
 					</ul>
 				</div>

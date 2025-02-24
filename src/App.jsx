@@ -7,7 +7,9 @@ import Wood from './pages/Wood';
 import Courses from './pages/Courses';
 import Inspections from './pages/InspectionSheets';
 import Supplies from './pages/Supplies';
+import Ropes from './pages/Ropes';
 import { BrowserRouter, Route, Routes } from 'react-router';
+import DailyTaskList from './components/DailyTaskList';
 
 function App() {
 	return (
@@ -16,7 +18,7 @@ function App() {
 			<Routes>
 				<Route
 					path='/'
-					element={<LinkCard />}
+					element={<DailyTaskList />}
 				/>
 				<Route
 					path='/harnesses'
@@ -41,6 +43,10 @@ function App() {
 				<Route
 					path='/supplies'
 					element={<Supplies />}
+				/>
+				<Route
+					path='/ropes'
+					element={<Ropes />}
 				/>
 			</Routes>
 		</BrowserRouter>
