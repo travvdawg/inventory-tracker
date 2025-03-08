@@ -18,8 +18,9 @@ function Wood() {
 	};
 
 	return (
-		<div className='wood'>
-			<h2>Inventory</h2>
+		<div className='woodContainer'>
+			<div className="wood">
+				<h2>Inventory</h2>
 			<p>There are {commonBoard - totalUsed} pieces of wood left</p>
 			<input
 				type='number'
@@ -28,7 +29,9 @@ function Wood() {
 				value={woodUsed}
 				onChange={handleChange}
 			/>
-			<button onClick={handleSubmit}>Submit</button>
+			<button onClick={handleSubmit} className='submit-btn'>Submit</button>
+			</div>
+			
 		</div>
 	);
 }

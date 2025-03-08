@@ -133,6 +133,13 @@ h1 {
 	box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.425);
 }
 
+.harness-container, .courses-container, .ropes-container, .hardware-container {
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .ropes,
 .harness,
 .courses,
@@ -142,7 +149,7 @@ h1 {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	width: 100vw;
+	width: 80vw;
 }
 
 .ropes h2,
@@ -150,12 +157,20 @@ h1 {
 .wood,
 .courses h2,
 .hardware h2 {
+	font-size: 2rem;
 	padding: 1rem;
 	margin: 1rem;
 	height: 600px;
 	width: 300px;
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 0.068);
+	width: 80vw;
+}
+
+.woodCount {
+	width: 80%;
+	height: 3rem;
+	font-size: 1rem;
 }
 
 .task-list {
@@ -168,6 +183,7 @@ h1 {
 	align-items: center;
 	margin: auto;
 	margin-top: 2rem;
+	overflow: scroll;
 }
 
 .task-list ul {
@@ -191,6 +207,23 @@ h1 {
 	margin-top: 1.5rem;
 	padding-top: 1.5rem;
 	border-radius: 15px;
+}
+
+.submit-btn {
+	width: 300px;
+	height: 3.5rem;
+	border-radius: 15px;
+	border: none;
+	background-color: rgb(41, 41, 42);
+	color: rgba(255, 255, 255, 0.824);
+	font-size: 2rem;
+	font-weight: 800;
+}
+
+.submit-btn:hover {
+	cursor: pointer;
+	border: solid 2px black;
+	text-shadow: 3px 3px 2px black;
 }
 
 @media (prefers-color-scheme: light) {
@@ -234,6 +267,21 @@ h1 {
 
 	.nav-items.active {
 		display: flex;
+	}
+
+	.woodContainer {
+		width: 100vw;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.wood {
+		width: 80vw;
+		height: 80vw;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
 	}
 }
 
