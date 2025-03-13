@@ -291,6 +291,42 @@ ul {
   text-shadow: 3px 3px 2px black;
 }
 
+.courses-container {
+  width: 100vw;
+  /* background-color: black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.courses {
+  background-color: rgba(255, 255, 255, 0.068);
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 2rem;
+  padding-top: 0.5rem;
+  height: auto;
+}
+
+.monthly-inspection {
+  width: 100%;
+  margin: 0.5rem;
+  overflow: auto;
+}
+
+.monthly-inspection input {
+  margin: 0.5rem;
+  height: 30px;
+}
+
+.courses input {
+  width: 90%;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
