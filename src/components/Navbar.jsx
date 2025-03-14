@@ -25,6 +25,11 @@ function Navbar() {
           </div>
           <ul className={`nav-items ${isOpen ? 'active' : ''}`}>
             <li>
+              <Link to='/account' onClick={handleLinkClick}>
+                Account
+              </Link>
+            </li>{' '}
+            <li>
               <Link to='/harnesses' onClick={handleLinkClick}>
                 Harnesses
               </Link>
