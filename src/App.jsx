@@ -11,6 +11,8 @@ import Ropes from './pages/Ropes';
 import Account from './pages/Account';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import DailyTaskList from './components/DailyTaskList';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/account' element={<Account />} />
+
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
 
         <Route path='/' element={<DailyTaskList />} />
         <Route path='/harnesses' element={<Harnesses />} />
