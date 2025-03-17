@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { account, ID } from '../lib/appwrite';
+import { Navigate } from 'react-router-dom'; // slight fix: should be from 'react-router-dom'
+import { account } from '../lib/appwrite';
 
 const Account = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     async function checkSession() {
@@ -15,65 +14,32 @@ const Account = () => {
         setLoggedInUser(user);
       } catch (error) {
         console.log('No active session:', error);
+      } finally {
+        setChecking(false);
       }
     }
     checkSession();
   }, []);
 
-  async function login(email, password) {
-    await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get());
+  const handleLogout = async () => {
+    await account.deleteSession('current');
+    setIsLoggingOut(true);
+  };
+  if (checking) return <p>Loading...</p>;
+  if (isLoggingOut) {
+    return <Navigate to='/login' />;
   }
+
+  if (!loggedInUser) {
+    return <Navigate to='/login' />;
+  }
+
   return (
-    <div className='login'>
-      <p>
-        {loggedInUser ? `Logged in as ${loggedInUser.name}` : 'Not logged in'}
-      </p>
-
-      <form className='login-form'>
-        <input
-          type='email'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type='text'
-          placeholder='Name'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <button type='button' onClick={() => login(email, password)}>
-          Login
-        </button>
-
-        <button
-          type='button'
-          onClick={async () => {
-            await account.create(ID.unique(), email, password, name);
-            login(email, password);
-          }}
-        >
-          Register
-        </button>
-
-        <button
-          type='button'
-          onClick={async () => {
-            await account.deleteSession('current');
-            setLoggedInUser(null);
-          }}
-        >
-          Logout
-        </button>
-      </form>
+    <div className='account'>
+      <h2>Hello {loggedInUser.name}</h2>
+      <p>Email: {loggedInUser.email}</p>
+      <br />
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

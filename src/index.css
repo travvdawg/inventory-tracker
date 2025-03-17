@@ -347,7 +347,7 @@ ul {
   align-items: center;
   flex-direction: column;
   margin: 2rem;
-  width: 60%;
+  width: 30%;
 }
 
 .login-form input {
@@ -423,6 +423,10 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+
+  .login-form {
+    width: 60%;
   }
 }
 
