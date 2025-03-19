@@ -1,15 +1,17 @@
+import { useTasks } from './TaskContent';
+
 function DailyTaskList() {
+  const { tasks } = useTasks();
   return (
     <div className='task-list-container'>
       <div className='task-list'>
-        <h1>Todays Tasks</h1>
+        <h1>Daily Tasks</h1>
         <ul>
-          <li>Clean trash</li>
-          <li>Replace ropes</li>
-          <li>Organize tool shed</li>
-          <li>Wipe down the coolers</li>
+          {tasks.map((task) => (
+            <li key={task.id}>{task.text}</li>
+          ))}
         </ul>
-        <button className='task-list-submit'>Daily task list</button>
+        {/* <button className='task-list-submit'>Daily task list</button> */}
       </div>
     </div>
   );
