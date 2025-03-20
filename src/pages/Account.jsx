@@ -48,15 +48,22 @@ const Account = () => {
     <div className='account'>
       <h2>Hello {loggedInUser.name}</h2>
       <p>Email: {loggedInUser.email}</p>
+      <button onClick={handleLogout} className='log-out-btn'>
+        Logout
+      </button>
       <br />
-      <input
-        type='text'
-        placeholder='New task'
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-      />
-      <button onClick={handleAddTask}>Add Task</button>
-      <button onClick={handleLogout}>Logout</button>
+      <div className='add-tasks'>
+        <input
+          type='text'
+          placeholder='New task'
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button onClick={handleAddTask} className='add-task-btn'>
+          Add Task
+        </button>
+      </div>
+
       <DailyTaskList />
     </div>
   );
