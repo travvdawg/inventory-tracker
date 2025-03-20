@@ -223,6 +223,7 @@ h1 {
   align-items: center;
   margin: auto;
   margin-top: 2rem;
+  margin-bottom: 4rem;
   overflow: auto;
   padding-bottom: 2rem;
 }
@@ -365,6 +366,40 @@ ul {
   color: black;
   font-size: 1rem;
   font-weight: 800;
+}
+
+.log-out-btn {
+  width: 30%;
+  height: 2.5rem;
+  margin: 0.5rem;
+  font-weight: bolder;
+  font-size: 1rem;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.639);
+  border-radius: 10px;
+}
+
+.add-tasks {
+  margin-top: 1.5rem;
+}
+
+.add-tasks input {
+  width: 40%;
+  height: 30px;
+  border: none;
+  padding-left: 5px;
+}
+
+.add-task-btn {
+  width: 100px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.649);
+  border: none;
+  font-weight: bold;
+}
+
+.add-task-btn:hover {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: light) {
