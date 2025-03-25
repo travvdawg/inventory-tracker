@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom'; // slight fix: should be from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 import { account } from '../lib/appwrite';
 import DailyTaskList from '../components/DailyTaskList';
 import { useTasks } from '../components/TaskContent';
+import { databases } from '../lib/appwrite';
 
 const Account = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -38,10 +39,26 @@ const Account = () => {
     return <Navigate to='/login' />;
   }
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (newTask.trim() === '') return;
-    setTasks([...tasks, { id: Date.now(), text: newTask }]);
-    setNewTask('');
+
+    try {
+      const user = await account.get();
+      const response = await databases.createDocument(
+        import.meta.env.VITE_APPWRITE_DATABASE_ID,
+        import.meta.env.VITE_APPWRITE_COLLECTION_ID,
+        'unique()',
+        {
+          text: newTask,
+          userId: user.$id,
+        }
+      );
+
+      setTasks([...tasks, { id: response.$id, text: newTask }]);
+      setNewTask('');
+    } catch (err) {
+      console.error('Error adding task:', err);
+    }
   };
 
   return (
