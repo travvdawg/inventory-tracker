@@ -134,10 +134,82 @@ h1 {
 }
 
 .harness-container {
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  margin: 3rem;
+  overflow: non;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  overflow: hidden;
+}
+
+.button-container button {
+  margin: 0.5rem;
+  height: 3rem;
+  width: 100%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.795);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  height: 75%;
+  text-align: center;
+  position: relative;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  scrollbar-color: rgba(254, 254, 254, 0.209) transparent;
+}
+
+.modal > * {
+  width: 80%;
+}
+
+.modal select {
+  margin: 0.5rem;
+}
+
+.modal input {
+  padding: 0.5rem;
+  margin: 0.25rem;
+}
+
+.modal textarea {
+  width: 80%;
+  min-height: 6rem;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.modal button {
+  height: 3rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .harness {
@@ -169,21 +241,6 @@ h1 {
   padding: 0;
 }
 
-/* .harness-container,
-.courses-container,
-.ropes-container,
-.hardware-container,
-.monthly-inspection {
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* .ropes,
-.harness,
-.courses,
-.hardware, */
 .wood {
   display: flex;
   align-items: center;
@@ -192,11 +249,7 @@ h1 {
   width: 80vw;
 }
 
-.wood
-/* .ropes h2,
-.harness h2,
-.courses h2,
-.hardware h2  */ {
+.wood {
   font-size: 2rem;
   padding: 1rem;
   margin: 1rem;
@@ -300,7 +353,6 @@ ul {
 
 .courses-container {
   width: 100vw;
-  /* background-color: black; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -400,6 +452,20 @@ ul {
 
 .add-task-btn:hover {
   cursor: pointer;
+}
+
+.dropdown-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.harness-number {
+  width: 60%;
+  height: 2.5rem;
+  font-size: 1.25rem;
 }
 
 @media (prefers-color-scheme: light) {
