@@ -169,7 +169,7 @@ h1 {
 }
 
 .modal {
-  background: rgba(0, 0, 0, 0.795);
+  background: rgba(0, 0, 0, 0.871);
   padding: 20px;
   border-radius: 10px;
   width: 90%;
@@ -466,6 +466,43 @@ ul {
   width: 60%;
   height: 2.5rem;
   font-size: 1.25rem;
+}
+
+.inspection-answers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid white 1px;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border-radius: 10px;
+}
+
+.inspection-answers select {
+  width: 20%;
+  height: 35px;
+  border-radius: 13px;
+}
+
+.inspection-answers select:hover {
+  cursor: pointer;
+}
+
+.modal-buttons {
+  width: 86%;
+}
+
+.modal-buttons button {
+  width: 45%;
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.121);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.modal-buttons button:hover {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: light) {

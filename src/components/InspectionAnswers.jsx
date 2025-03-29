@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-const InspectionAnswers = () => {
+const InspectionAnswers = forwardRef(({ label }, ref) => {
   return (
-    <div>
-      <select>
+    <div className='inspection-answers'>
+      <h3>{label}</h3>
+      <select ref={ref}>
         <option value='good'>Good</option>
         <option value='monitor'>Monitor</option>
         <option value='repair'>Repair</option>
@@ -11,6 +12,6 @@ const InspectionAnswers = () => {
       </select>
     </div>
   );
-};
+});
 
 export default InspectionAnswers;
