@@ -1,10 +1,59 @@
+import { useRef } from 'react';
+import { jsPDF } from 'jspdf';
 import InspectionAnswers from './InspectionAnswers';
 
 const InspectionModal = ({ closeModal }) => {
+  const harnessRef = useRef(null);
+  const commentsRef = useRef(null);
+  const answerRefs = useRef([]);
+
+  const inspectionFields = [
+    'Webbing condition',
+    'Webbing at tie-in point',
+    'Load-bearing stitching',
+    'Gear loop',
+    'Attachment buckles',
+    'Double lanyard',
+    'Pulley sling',
+    'Carabiners',
+    'Quick link',
+    'Pulley',
+  ];
+
+  const generatePDF = () => {
+    const pdf = new jsPDF();
+    const currentDate = new Date().toLocaleDateString();
+
+    const harnessNum = harnessRef.current?.value || 'N/A';
+    const comments = commentsRef.current?.value || 'No additional comments';
+
+    const answers = inspectionFields.map((field, i) => {
+      const selectElement = answerRefs.current[i];
+      return `${field}: ${selectElement?.value || 'N/A'}`;
+    });
+
+    pdf.setFontSize(16);
+    pdf.text('Monthly Harness Inspection', 10, 10);
+    pdf.setFontSize(12);
+    pdf.text(`Date: ${currentDate}`, 10, 20);
+    pdf.text(`Harness Number: ${harnessNum}`, 10, 30);
+
+    let yPosition = 40;
+    answers.forEach((answer) => {
+      pdf.text(answer, 10, yPosition);
+      yPosition += 10;
+    });
+
+    pdf.text('Additional Comments:', 10, yPosition + 10);
+    pdf.text(comments, 10, yPosition + 20, { maxWidth: 180 });
+
+    pdf.save('harness_inspection.pdf');
+  };
+
   return (
     <div className='modal'>
       <h2>Monthly Harness Inspection</h2>
-      <select className='harness-number'>
+      <select className='harness-number' ref={harnessRef}>
         <option value=''>--Harness Number--</option>
         {[...Array(200)].map((_, i) => (
           <option key={i + 1} value={i + 1}>
@@ -17,19 +66,18 @@ const InspectionModal = ({ closeModal }) => {
           </option>
         ))}
       </select>
-      {/* <InspectionAnswers /> */}
-      <input type='text' placeholder='Webbing condition' />
-      <input type='text' placeholder='Webbing at tie-in point' />
-      <input type='text' placeholder='Load-bearing stitching' />
-      <input type='text' placeholder='Gear loop' />
-      <input type='text' placeholder='Attachmennt buckles' />
-      <input type='text' placeholder='Double lanyard' />
-      <input type='text' placeholder='Pulley sling' />
-      <input type='text' placeholder='Carabiners' />
-      <input type='text' placeholder='Quick link' />
-      <input type='text' placeholder='Pulley' />
-      <textarea placeholder='Additional comments'></textarea>
-      <button onClick={closeModal}>Close</button>
+      {inspectionFields.map((field, i) => (
+        <InspectionAnswers
+          key={i}
+          label={field}
+          ref={(el) => (answerRefs.current[i] = el)}
+        />
+      ))}
+      <textarea placeholder='Additional comments' ref={commentsRef}></textarea>
+      <div className='modal-buttons'>
+        <button onClick={generatePDF}>Submit</button>
+        <button onClick={closeModal}>Close</button>
+      </div>
     </div>
   );
 };
