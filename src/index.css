@@ -505,6 +505,22 @@ ul {
   cursor: pointer;
 }
 
+.course-list-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 2rem;
+  margin: 3rem;
+}
+
+.course-list-container h2 {
+  margin: 1rem;
+  background-color: black;
+  width: 350px;
+  height: 150px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -518,7 +534,7 @@ ul {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 923px) {
   .hamburger-menu {
     display: flex;
   }
@@ -566,11 +582,28 @@ ul {
   .login-form {
     width: 60%;
   }
+
+  .course-list-container h2 {
+    width: 300px;
+    height: 125px;
+  }
 }
 
 @media (max-width: 800px) {
   .cardImg {
     height: 200px;
+  }
+
+  .course-list-container h2 {
+    width: 500px;
+  }
+}
+
+@media (max-width: 725px) {
+  .course-list-container h2 {
+    width: 500px;
+    padding: 0.5rem;
+    margin: 0.5rem;
   }
 }
 
@@ -609,5 +642,16 @@ ul {
 
   .task-list .task-list-submit {
     margin-top: 3rem;
+  }
+
+  .course-list-container h2 {
+    width: 400px;
+  }
+}
+
+@media (max-width: 550px) {
+  .course-list-container h2 {
+    font-size: 1.25rem;
+    width: 300px;
   }
 }
