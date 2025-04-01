@@ -13,20 +13,19 @@ function Game({ courseId, gameNumber }) {
         <h3>Game {gameNumber}</h3>
       </div>
 
-      <div
-        className={`modal-overlay ${isModalOpen ? 'open' : ''}`}
-        onClick={closeModal}
-      >
-        <div className='modal' onClick={(e) => e.stopPropagation()}>
-          <h2>
-            {courseId} - Game {gameNumber} Inspection
-          </h2>
-          <GameInspectionForm courseId={courseId} gameNumber={gameNumber} />
-          <button className='close-btn' onClick={closeModal}>
-            Close
-          </button>
+      {isModalOpen && (
+        <div className='modal-overlay' onClick={closeModal}>
+          <div className='modal' onClick={(e) => e.stopPropagation()}>
+            <h2>
+              {courseId} - Game {gameNumber} Inspection
+            </h2>
+            <GameInspectionForm courseId={courseId} gameNumber={gameNumber} />
+            <button className='close-btn' onClick={closeModal}>
+              Close
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
