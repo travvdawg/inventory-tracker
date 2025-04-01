@@ -1,30 +1,32 @@
-import CourseInspection from '../components/CourseInspection';
+import { useState } from 'react';
+import Course from '../components/Course';
+
+const coursesData = [
+  { id: 'Green', name: 'Green Course', games: 12 },
+  { id: 'Blue', name: 'Blue Course', games: 13 },
+  { id: 'Silver', name: 'Silver Course', games: 8 },
+  { id: 'Red', name: 'Red Course', games: 14 },
+  { id: 'Kids 1', name: 'Kids 1', games: 11 },
+  { id: 'Kids 2', name: 'Kids 2', games: 10 },
+];
 
 function Courses() {
+  const [activeCourse, setActiveCourse] = useState(null);
+
   return (
-    <div>
-      <div className='course-list-container'>
-        <div className='green-course'>
-          <h2>Green Course</h2>
-        </div>
-        <div className='blue-course'>
-          <h2>Blue Course</h2>
-        </div>
-        <div className='silver-course'>
-          <h2>Silver Course</h2>
-        </div>
-        <div className='red-course'>
-          <h2>Red Course</h2>
-        </div>
-        <div className='first-kids-course'>
-          <h2>Kids 1</h2>
-        </div>
-        <div className='second-kids-course'>
-          <h2>Kids 2</h2>
-        </div>
-      </div>
-      <CourseInspection />
+    <div className='course-list-container'>
+      {coursesData.map((course) => (
+        <Course
+          key={course.id}
+          course={course}
+          isOpen={activeCourse === course.id}
+          onToggle={() =>
+            setActiveCourse(activeCourse === course.id ? null : course.id)
+          }
+        />
+      ))}
     </div>
   );
 }
+
 export default Courses;
