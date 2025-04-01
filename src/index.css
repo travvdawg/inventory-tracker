@@ -521,7 +521,7 @@ ul {
   height: 150px;
 }
 
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -551,7 +551,7 @@ ul {
 
 .modal-overlay.open .modal {
   transform: scale(1);
-}
+} */
 
 .course-list-container h2:hover,
 .course-list-container h3:hover {
