@@ -1,11 +1,14 @@
 import { useRef } from 'react';
 import { jsPDF } from 'jspdf';
 import InspectionAnswers from './InspectionAnswers';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 const InspectionModal = ({ closeModal }) => {
   const harnessRef = useRef(null);
   const commentsRef = useRef(null);
   const answerRefs = useRef([]);
+
+  const success = () => toast.success('Inspection Submitted!');
 
   const inspectionFields = [
     'Webbing condition',
@@ -48,6 +51,8 @@ const InspectionModal = ({ closeModal }) => {
     pdf.text(comments, 10, yPosition + 20, { maxWidth: 180 });
 
     pdf.save('harness_inspection.pdf');
+
+    success();
   };
 
   return (
@@ -78,6 +83,20 @@ const InspectionModal = ({ closeModal }) => {
         <button onClick={generatePDF}>Submit</button>
         <button onClick={closeModal}>Close</button>
       </div>
+      <ToastContainer
+        position='top-right'
+        autoClose={10000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+        transition={Bounce}
+      />
+      ;
     </div>
   );
 };

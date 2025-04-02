@@ -1,9 +1,11 @@
 import { useTasks } from './TaskContent';
 import { useEffect } from 'react';
 import { account, databases, Query } from '../lib/appwrite';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 function DailyTaskList() {
   const { tasks, setTasks } = useTasks();
+  const notify = () => toast('toast notification');
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -34,6 +36,20 @@ function DailyTaskList() {
             <li key={task.id}>{task.text}</li>
           ))}
         </ul>
+        <button onClick={notify}>Click me</button>
+        <ToastContainer
+          position='top-right'
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme='dark'
+          transition={Slide}
+        />
       </div>
     </div>
   );
