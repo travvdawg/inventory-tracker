@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import { useState } from 'react';
 import Hamburger from 'hamburger-react';
-import Ropes from '../pages/Ropes';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,11 +46,6 @@ function Navbar() {
             <li>
               <Link to='/hardware' onClick={handleLinkClick}>
                 Hardware
-              </Link>
-            </li>
-            <li>
-              <Link to='/ropes' onClick={handleLinkClick}>
-                Ropes
               </Link>
             </li>
           </ul>

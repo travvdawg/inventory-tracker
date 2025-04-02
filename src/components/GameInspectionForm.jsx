@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ID, databases, Query } from '../lib/appwrite';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COURSE_COLLECTION_ID;
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
@@ -16,6 +17,8 @@ function GameInspectionForm({ courseId, gameNumber }) {
   });
 
   const [docId, setDocId] = useState(null);
+
+  const success = () => toast.success('Inspection Submitted!');
 
   useEffect(() => {
     async function fetchData() {
@@ -71,6 +74,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
           }
         );
         setDocId(newDoc.$id);
+        success();
       }
     } catch (error) {
       console.error('Error saving game data:', error);
@@ -153,6 +157,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
       <button onClick={handleSave} className='save-btn'>
         Save
       </button>
+      <ToastContainer />
     </div>
   );
 }
