@@ -4,13 +4,11 @@ import { createContext, useState, useContext } from 'react';
 const TaskContext = createContext();
 
 export const TaskContent = ({ children }) => {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Inspect harnesses' },
-    { id: 2, text: 'Refill bandaids' },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <TaskContext.Provider value={{ tasks, setTasks }}>
+    <TaskContext.Provider value={{ tasks, setTasks, isLoading, setIsLoading }}>
       {children}
     </TaskContext.Provider>
   );

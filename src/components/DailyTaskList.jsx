@@ -10,11 +10,9 @@ function DailyTaskList() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const user = await account.get();
         const res = await databases.listDocuments(
           import.meta.env.VITE_APPWRITE_DATABASE_ID,
-          import.meta.env.VITE_APPWRITE_COLLECTION_ID,
-          [Query.equal('userId', user.$id)]
+          import.meta.env.VITE_APPWRITE_COLLECTION_ID
         );
         const fetchedTasks = res.documents.map((doc) => ({
           id: doc.$id,

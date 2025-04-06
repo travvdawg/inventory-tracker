@@ -4,8 +4,6 @@ import { account } from '../lib/appwrite';
 import DailyTaskList from '../components/DailyTaskList';
 import { useTasks } from '../components/TaskContent';
 import { databases } from '../lib/appwrite';
-import { ToastContainer, toast, Slide } from 'react-toastify';
-
 const Account = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [checking, setChecking] = useState(true);
@@ -18,7 +16,6 @@ const Account = () => {
       try {
         const user = await account.get();
         setLoggedInUser(user);
-        toast.success('Sucussfully logged in!');
       } catch (error) {
         console.log('No active session:', error);
       } finally {
@@ -82,8 +79,6 @@ const Account = () => {
           Add Task
         </button>
       </div>
-      <DailyTaskList />
-      <ToastContainer />
     </div>
   );
 };

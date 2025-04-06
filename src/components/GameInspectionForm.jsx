@@ -18,7 +18,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
 
   const [docId, setDocId] = useState(null);
 
-  const success = () => toast.success('Inspection Submitted!');
+  const success = () => toast.success('Information updated!');
 
   useEffect(() => {
     async function fetchData() {
@@ -55,12 +55,21 @@ function GameInspectionForm({ courseId, gameNumber }) {
 
   const handleSave = async () => {
     try {
+      const {
+        $id,
+        $databaseId,
+        $collectionId,
+        $createdAt,
+        $updatedAt,
+        ...filteredData
+      } = formData;
+
       if (docId) {
         await databases.updateDocument(
           DATABASE_ID,
           COLLECTION_ID,
           docId,
-          formData
+          filteredData // Use filteredData instead of formData
         );
       } else {
         const newDoc = await databases.createDocument(
@@ -70,12 +79,12 @@ function GameInspectionForm({ courseId, gameNumber }) {
           {
             courseId,
             gameNumber,
-            ...formData,
+            ...filteredData, // Ensure metadata fields are excluded
           }
         );
         setDocId(newDoc.$id);
-        success();
       }
+      success();
     } catch (error) {
       console.error('Error saving game data:', error);
     }
