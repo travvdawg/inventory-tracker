@@ -96,7 +96,6 @@ const InspectionModal = ({ closeModal }) => {
         theme='dark'
         transition={Bounce}
       />
-      ;
     </div>
   );
 };

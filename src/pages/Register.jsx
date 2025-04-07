@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { account, ID } from '../lib/appwrite';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [checking, setChecking] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function checkSession() {
@@ -14,15 +17,28 @@ const Register = () => {
         setLoggedInUser(user);
       } catch (error) {
         console.log('No active session:', error);
+      } finally {
+        setChecking(false);
       }
     }
     checkSession();
   }, []);
 
-  async function login(email, password) {
-    await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get());
+  if (loggedInUser) {
+    return <Navigate to='/account' />;
   }
+
+  async function registerUser() {
+    try {
+      await account.create(ID.unique(), email, password, name);
+      await account.createEmailPasswordSession(email, password);
+      setLoggedInUser(await account.get());
+      navigate('/account');
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
+  }
+
   return (
     <div className='login'>
       <p>Please fill out all fields to register</p>
@@ -46,13 +62,7 @@ const Register = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button
-          type='button'
-          onClick={async () => {
-            await account.create(ID.unique(), email, password, name);
-            login(email, password);
-          }}
-        >
+        <button type='button' onClick={registerUser}>
           Register
         </button>
       </form>
