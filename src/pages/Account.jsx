@@ -4,12 +4,15 @@ import { account } from '../lib/appwrite';
 import DailyTaskList from '../components/DailyTaskList';
 import { useTasks } from '../components/TaskContent';
 import { databases } from '../lib/appwrite';
+import { ToastContainer, toast } from 'react-toastify';
 const Account = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [checking, setChecking] = useState(true);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { tasks, setTasks } = useTasks();
   const [newTask, setNewTask] = useState('');
+
+  const notify = () => toast.error('You are not allowed to add a task');
 
   useEffect(() => {
     async function checkSession() {
@@ -56,7 +59,7 @@ const Account = () => {
       setTasks([...tasks, { id: response.$id, text: newTask }]);
       setNewTask('');
     } catch (err) {
-      console.error('Error adding task:', err);
+      notify();
     }
   };
 
@@ -78,7 +81,9 @@ const Account = () => {
         <button onClick={handleAddTask} className='add-task-btn'>
           Add Task
         </button>
+        <DailyTaskList />
       </div>
+      <ToastContainer />;
     </div>
   );
 };

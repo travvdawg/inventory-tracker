@@ -150,6 +150,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
           <option value=''>None</option>
           <option value='torx'>Torx</option>
           <option value='square'>Square Bit</option>
+          <option value='square'>Both</option>
         </select>
       </label>
 
