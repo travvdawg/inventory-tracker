@@ -83,7 +83,7 @@ const Account = () => {
         </button>
         <DailyTaskList />
       </div>
-      <ToastContainer />;
+      <ToastContainer />
     </div>
   );
 };
