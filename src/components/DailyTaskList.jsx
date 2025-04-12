@@ -1,9 +1,11 @@
 import { useTasks } from './TaskContent';
 import { useEffect } from 'react';
 import { account, databases, Query } from '../lib/appwrite';
+import { ToastContainer, toast } from 'react-toastify';
 
 function DailyTaskList() {
   const { tasks, setTasks } = useTasks();
+  const errMessage = () => toast.error('You are not allowed to delete tasks');
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -33,6 +35,7 @@ function DailyTaskList() {
       );
       setTasks((prev) => prev.filter((task) => task.id !== id));
     } catch (err) {
+      errMessage();
       console.log('Failed to delete task:', err);
     }
   };
@@ -55,6 +58,7 @@ function DailyTaskList() {
           ))}
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 }
