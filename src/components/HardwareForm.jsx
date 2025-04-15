@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { databases, Query } from '../lib/appwrite';
 
 const HardwareForm = () => {
   const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;

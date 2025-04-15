@@ -34,18 +34,13 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to='/wood' onClick={handleLinkClick}>
-                Wood
-              </Link>
-            </li>
-            <li>
               <Link to='/courses' onClick={handleLinkClick}>
                 Courses
               </Link>
             </li>
             <li>
-              <Link to='/hardware' onClick={handleLinkClick}>
-                Hardware
+              <Link to='/inventory' onClick={handleLinkClick}>
+                Inventory
               </Link>
             </li>
           </ul>

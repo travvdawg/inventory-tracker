@@ -7,6 +7,7 @@ import Courses from './pages/Courses';
 import Inspections from './pages/InspectionSheets';
 import Supplies from './pages/Supplies';
 import Account from './pages/Account';
+import Inventory from './pages/Inventory';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import DailyTaskList from './components/DailyTaskList';
 import Login from './pages/Login';
@@ -31,6 +32,7 @@ function App() {
           <Route path='/courses' element={<Courses />} />
           <Route path='/inspections' element={<Inspections />} />
           <Route path='/supplies' element={<Supplies />} />
+          <Route path='/inventory' element={<Inventory />} />
         </Routes>
       </BrowserRouter>
     </TaskContent>
