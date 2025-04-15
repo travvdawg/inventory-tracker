@@ -69,7 +69,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
           DATABASE_ID,
           COLLECTION_ID,
           docId,
-          filteredData // Use filteredData instead of formData
+          filteredData
         );
       } else {
         const newDoc = await databases.createDocument(
@@ -79,7 +79,7 @@ function GameInspectionForm({ courseId, gameNumber }) {
           {
             courseId,
             gameNumber,
-            ...filteredData, // Ensure metadata fields are excluded
+            ...filteredData,
           }
         );
         setDocId(newDoc.$id);
