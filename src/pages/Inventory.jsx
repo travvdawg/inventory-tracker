@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { databases, ID, account, Query } from '../lib/appwrite';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const HARDWARE_ID = import.meta.env.VITE_APPWRITE_HARDWARE_ID;
@@ -13,6 +14,10 @@ const Inventory = () => {
 	const [userRole, setUserRole] = useState(null);
 	const [newItemName, setNewItemName] = useState('');
 	const [newItemAmount, setNewItemAmount] = useState('');
+
+	const successNotification = () => {
+		toast('New item added!');
+	};
 
 	useEffect(() => {
 		async function fetchHardware() {
@@ -67,6 +72,7 @@ const Inventory = () => {
 			);
 
 			setHardwareList((prev) => [...prev, res]);
+			successNotification();
 			setNewItemName('');
 			setNewItemAmount('');
 		} catch (err) {
@@ -95,29 +101,36 @@ const Inventory = () => {
 	if (loading) return <p>Loading inventory...</p>;
 
 	return (
-		<div>
+		<div className='inventory-page'>
 			<h2>Inventory</h2>
+			<br />
 
 			{user?.email === 'olivertravis554@gmail.com' && (
-				<div>
+				<div className='add-inventory-item'>
 					<h3>Add New Item</h3>
-					<input
-						type='text'
-						placeholder='Item name'
-						value={newItemName}
-						onChange={(e) => setNewItemName(e.target.value)}
-					/>
-					<input
-						type='number'
-						placeholder='Initial amount'
-						value={newItemAmount}
-						onChange={(e) => setNewItemAmount(e.target.value)}
-					/>
+					<br />
+					<div className='card-inputs'>
+						<input
+							type='text'
+							placeholder='Item name'
+							className='item-name'
+							value={newItemName}
+							onChange={(e) => setNewItemName(e.target.value)}
+						/>
+						<input
+							type='number'
+							placeholder='Initial amount'
+							className='item-number'
+							value={newItemAmount}
+							onChange={(e) => setNewItemAmount(e.target.value)}
+						/>
+					</div>
+
 					<button onClick={handleAddItem}>Add Item</button>
 				</div>
 			)}
 
-			<div>
+			<div className='inventory-cards'>
 				{hardwareList.map((item) => (
 					<InventoryItem
 						key={item.$id}
@@ -126,6 +139,19 @@ const Inventory = () => {
 					/>
 				))}
 			</div>
+			<ToastContainer
+				position='top-center'
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='dark'
+				transition={Bounce}
+			/>
 		</div>
 	);
 };
@@ -134,7 +160,7 @@ const InventoryItem = ({ item, onUpdate }) => {
 	const [qty, setQty] = useState(1);
 
 	return (
-		<div>
+		<div className='inventory-item'>
 			<h3>{item.hardwareName}</h3>
 			<p>Current Amount: {item.amount}</p>
 
@@ -145,9 +171,15 @@ const InventoryItem = ({ item, onUpdate }) => {
 				onChange={(e) => setQty(Number(e.target.value))}
 			/>
 
-			<button onClick={() => onUpdate(item.$id, item.amount, qty)}>Add</button>
+			<button
+				className='card-btns'
+				onClick={() => onUpdate(item.$id, item.amount, qty)}>
+				Add
+			</button>
 
-			<button onClick={() => onUpdate(item.$id, item.amount, -qty)}>
+			<button
+				className='card-btns'
+				onClick={() => onUpdate(item.$id, item.amount, -qty)}>
 				Subtract
 			</button>
 		</div>
