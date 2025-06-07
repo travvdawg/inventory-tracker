@@ -105,7 +105,7 @@ const Inventory = () => {
 			<h2>Inventory</h2>
 			<br />
 
-			{user?.email === 'olivertravis554@gmail.com' && (
+			{userRole === 'admin' && (
 				<div className='add-inventory-item'>
 					<h3>Add New Item</h3>
 					<br />
@@ -161,8 +161,9 @@ const InventoryItem = ({ item, onUpdate }) => {
 
 	return (
 		<div className='inventory-item'>
-			<h3>{item.hardwareName}</h3>
-			<p>Current Amount: {item.amount}</p>
+			<h3 className='hardware-name'>{item.hardwareName}</h3>
+			<p>Current Amount:</p>
+			<p className='hardware-amount'>{item.amount}</p>
 
 			<input
 				type='number'

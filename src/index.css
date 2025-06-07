@@ -561,14 +561,62 @@ ul {
 
 .course-list-container h2 {
 	margin: 1rem;
-	background-color: black;
+	background-color: #ffffff1c;
 	width: 350px;
 	height: 150px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .course-list-container h2:hover,
 .course-list-container h3:hover {
 	cursor: pointer;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.modal {
+	background: rgb(49, 49, 49);
+	border-radius: 12px;
+	padding: 2rem;
+	max-height: 90vh;
+	max-width: 500px;
+	width: 90%;
+	position: relative;
+	overflow-y: auto;
+}
+
+.game-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.game-card {
+	background-color: #242424;
+	margin: 0.5rem 0;
+	padding: 1rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+.game-card:hover {
+	background-color: #e0e0e0;
 }
 
 .game-inspection-form label {
@@ -658,6 +706,16 @@ ul {
 	margin-bottom: 0.5rem;
 	padding: 0.25rem;
 	width: 35%;
+}
+
+.hardware-name {
+	font-size: 1.5rem;
+}
+
+.hardware-amount {
+	font-size: 1.5rem;
+	font-weight: bolder;
+	text-shadow: 1px 1px 3px black;
 }
 
 @media (prefers-color-scheme: light) {
@@ -802,5 +860,17 @@ ul {
 	.course-list-container h2 {
 		font-size: 1.25rem;
 		width: 300px;
+	}
+
+	.course-list-container {
+		flex-direction: column;
+		align-items: center;
+		margin: 1rem;
+		padding: 1rem;
+	}
+
+	.course-list-container h2 {
+		max-width: 80vw;
+		height: 100px;
 	}
 }
