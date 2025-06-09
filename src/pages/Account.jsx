@@ -6,86 +6,93 @@ import { useTasks } from '../components/TaskContent';
 import { databases } from '../lib/appwrite';
 import { ToastContainer, toast } from 'react-toastify';
 const Account = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [checking, setChecking] = useState(true);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const { tasks, setTasks } = useTasks();
-  const [newTask, setNewTask] = useState('');
+	const [loggedInUser, setLoggedInUser] = useState(null);
+	const [checking, setChecking] = useState(true);
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
+	const { tasks, setTasks } = useTasks();
+	const [newTask, setNewTask] = useState('');
 
-  const notify = () => toast.error('You are not allowed to add a task');
+	const notify = () => toast.error('You are not allowed to add a task');
 
-  useEffect(() => {
-    async function checkSession() {
-      try {
-        const user = await account.get();
-        setLoggedInUser(user);
-      } catch (error) {
-        console.log('No active session:', error);
-      } finally {
-        setChecking(false);
-      }
-    }
-    checkSession();
-  }, []);
+	useEffect(() => {
+		async function checkSession() {
+			try {
+				const user = await account.get();
+				setLoggedInUser(user);
+			} catch (error) {
+				console.log('No active session:', error);
+			} finally {
+				setChecking(false);
+			}
+		}
+		checkSession();
+	}, []);
 
-  const handleLogout = async () => {
-    await account.deleteSession('current');
-    setIsLoggingOut(true);
-  };
-  if (checking) return <p>Loading...</p>;
-  if (isLoggingOut) {
-    return <Navigate to='/login' />;
-  }
+	const handleLogout = async () => {
+		await account.deleteSession('current');
+		setIsLoggingOut(true);
+	};
+	if (checking) return <p>Loading...</p>;
+	if (isLoggingOut) {
+		return <Navigate to='/login' />;
+	}
 
-  if (!loggedInUser) {
-    return <Navigate to='/login' />;
-  }
+	if (!loggedInUser) {
+		return <Navigate to='/login' />;
+	}
 
-  const handleAddTask = async () => {
-    if (newTask.trim() === '') return;
+	const handleAddTask = async () => {
+		if (newTask.trim() === '') return;
 
-    try {
-      const user = await account.get();
-      const response = await databases.createDocument(
-        import.meta.env.VITE_APPWRITE_DATABASE_ID,
-        import.meta.env.VITE_APPWRITE_COLLECTION_ID,
-        'unique()',
-        {
-          text: newTask,
-          userId: user.$id,
-        }
-      );
+		try {
+			const user = await account.get();
+			const response = await databases.createDocument(
+				import.meta.env.VITE_APPWRITE_DATABASE_ID,
+				import.meta.env.VITE_APPWRITE_COLLECTION_ID,
+				'unique()',
+				{
+					text: newTask,
+					userId: user.$id,
+				}
+			);
 
-      setTasks([...tasks, { id: response.$id, text: newTask }]);
-      setNewTask('');
-    } catch (err) {
-      notify();
-    }
-  };
+			setTasks([...tasks, { id: response.$id, text: newTask }]);
+			setNewTask('');
+		} catch (err) {
+			notify();
+		}
+	};
 
-  return (
-    <div className='account'>
-      <h2>Hello {loggedInUser.name}</h2>
-      <p>Email: {loggedInUser.email}</p>
-      <button onClick={handleLogout} className='log-out-btn'>
-        Logout
-      </button>
-      <br />
-      <div className='add-tasks'>
-        <input
-          type='text'
-          placeholder='New task'
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-        />
-        <button onClick={handleAddTask} className='add-task-btn'>
-          Add Task
-        </button>
-        <DailyTaskList />
-      </div>
-      <ToastContainer />
-    </div>
-  );
+	return (
+		<div className='account'>
+			<h2>Hello {loggedInUser.name}</h2>
+			<p>Email: {loggedInUser.email}</p>
+			<button
+				onClick={handleLogout}
+				className='log-out-btn'>
+				Logout
+			</button>
+			<br />
+			{loggedInUser?.email === 'olivertravis554@gmail.com' && (
+				<div className='add-tasks'>
+					<input
+						type='text'
+						placeholder='New task'
+						value={newTask}
+						onChange={(e) => setNewTask(e.target.value)}
+					/>
+					<button
+						onClick={handleAddTask}
+						className='add-task-btn'>
+						Add Task
+					</button>
+					<DailyTaskList user={loggedInUser} />
+				</div>
+			)}
+
+			<ToastContainer />
+		</div>
+	);
 };
 
 export default Account;
