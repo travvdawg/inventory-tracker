@@ -99,7 +99,8 @@ h1 {
 }
 
 .nav-items li a:hover {
-	filter: drop-shadow(0 0 0.75em #ffffffaa);
+	filter: drop-shadow(0 0 0.75em #977004);
+	color: rgb(194, 125, 21);
 }
 
 .logo img {

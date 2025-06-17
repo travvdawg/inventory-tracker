@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { account, databases, Query } from '../lib/appwrite';
 import { ToastContainer, toast } from 'react-toastify';
 
-function DailyTaskList({ user }) {
+function DailyTaskList({ user, userRole }) {
 	const { tasks, setTasks } = useTasks();
 	const errMessage = () => toast.error('You are not allowed to delete tasks');
 
@@ -50,7 +50,7 @@ function DailyTaskList({ user }) {
 							key={task.id}
 							className='task-item'>
 							<span className='task-text'>{task.text}</span>
-							{user === 'admin' && (
+							{userRole === 'admin' && (
 								<button
 									className='delete-btn'
 									onClick={() => deleteTask(task.id)}>
