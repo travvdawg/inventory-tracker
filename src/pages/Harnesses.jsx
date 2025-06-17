@@ -2,6 +2,7 @@ import { useState } from 'react';
 import InspectionModal from '../components/InspectionModal';
 import RepairModal from '../components/RepairModal';
 import PartsModal from '../components/PartsModal';
+import ViewInspections from '../components/ViewInspections';
 
 function Harnesses() {
 	const [activeModal, setActiveModal] = useState(null);
@@ -15,7 +16,7 @@ function Harnesses() {
 			<div className='button-container'>
 				<button onClick={() => openModal('inspection')}>Inspect Harness</button>
 				<button onClick={() => openModal('repair')}>Report Repair</button>
-				{/* <button onClick={() => openModal('parts')}>Manage Clic-it Parts</button> */}
+				<button onClick={() => openModal('view')}>View Inspections</button>
 			</div>
 
 			{activeModal && (
@@ -25,6 +26,9 @@ function Harnesses() {
 					)}
 					{activeModal === 'repair' && <RepairModal closeModal={closeModal} />}
 					{activeModal === 'parts' && <PartsModal closeModal={closeModal} />}
+					{activeModal === 'view' && (
+						<ViewInspections closeModal={closeModal} />
+					)}
 				</div>
 			)}
 		</div>
