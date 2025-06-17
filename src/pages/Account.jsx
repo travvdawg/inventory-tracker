@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { account } from '../lib/appwrite';
+import { account, Query } from '../lib/appwrite';
 import DailyTaskList from '../components/DailyTaskList';
 import { useTasks } from '../components/TaskContent';
 import { databases } from '../lib/appwrite';
@@ -14,18 +14,31 @@ const Account = () => {
 
 	const notify = () => toast.error('You are not allowed to add a task');
 
+	const [userRole, setUserRole] = useState(null);
+
 	useEffect(() => {
-		async function checkSession() {
+		async function fetchUserData() {
 			try {
-				const user = await account.get();
-				setLoggedInUser(user);
-			} catch (error) {
-				console.log('No active session:', error);
+				const accountData = await account.get();
+				setLoggedInUser(accountData);
+
+				const res = await databases.listDocuments(
+					import.meta.env.VITE_APPWRITE_DATABASE_ID,
+					import.meta.env.VITE_APPWRITE_USER_PROFILE_COLLECTION,
+					[Query.equal('userId', accountData.$id)]
+				);
+
+				if (res.documents.length > 0) {
+					setUserRole(res.documents[0].role); // admin, editor, etc.
+				}
+			} catch (err) {
+				console.error('Failed to fetch user or role:', err);
 			} finally {
 				setChecking(false);
 			}
 		}
-		checkSession();
+
+		fetchUserData();
 	}, []);
 
 	const handleLogout = async () => {
@@ -66,7 +79,6 @@ const Account = () => {
 	return (
 		<div className='account'>
 			<h2>Hello {loggedInUser.name}</h2>
-			<p>Email: {loggedInUser.email}</p>
 			<button
 				onClick={handleLogout}
 				className='log-out-btn'>
@@ -86,7 +98,10 @@ const Account = () => {
 						className='add-task-btn'>
 						Add Task
 					</button>
-					<DailyTaskList user={loggedInUser} />
+					<DailyTaskList
+						user={loggedInUser}
+						userRole={userRole}
+					/>
 				</div>
 			)}
 
