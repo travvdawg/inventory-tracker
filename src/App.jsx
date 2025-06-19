@@ -15,28 +15,61 @@ import Register from './pages/Register';
 import { TaskContent } from './components/TaskContent';
 
 function App() {
-  return (
-    <TaskContent>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/account' element={<Account />} />
+	return (
+		<TaskContent>
+			<BrowserRouter>
+				<Navbar />
+				<Routes>
+					<Route
+						path='/account'
+						element={<Account />}
+					/>
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+					<Route
+						path='/login'
+						element={<Login />}
+					/>
+					<Route
+						path='/register'
+						element={<Register />}
+					/>
 
-          <Route path='/' element={<DailyTaskList />} />
-          <Route path='/harnesses' element={<Harnesses />} />
-          <Route path='/wood' element={<Wood />} />
-          <Route path='/hardware' element={<Hardware />} />
-          <Route path='/courses' element={<Courses />} />
-          <Route path='/inspections' element={<Inspections />} />
-          <Route path='/supplies' element={<Supplies />} />
-          <Route path='/inventory' element={<Inventory />} />
-        </Routes>
-      </BrowserRouter>
-    </TaskContent>
-  );
+					<Route
+						path='/'
+						element={<DailyTaskList />}
+					/>
+					<Route
+						path='/harnesses'
+						element={<Harnesses />}
+					/>
+					<Route
+						path='/wood'
+						element={<Wood />}
+					/>
+					<Route
+						path='/hardware'
+						element={<Hardware />}
+					/>
+					<Route
+						path='/courses'
+						element={<Courses />}
+					/>
+					<Route
+						path='/inspections'
+						element={<Inspections />}
+					/>
+					<Route
+						path='/supplies'
+						element={<Supplies />}
+					/>
+					<Route
+						path='/inventory'
+						element={<Inventory />}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</TaskContent>
+	);
 }
 
 export default App;
