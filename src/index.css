@@ -719,6 +719,19 @@ body.modal-open {
 	text-shadow: 1px 1px 3px black;
 }
 
+.game-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.game-card img {
+	width: auto;
+	height: 150px;
+	border-radius: 15px;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

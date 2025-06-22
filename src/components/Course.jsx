@@ -1,10 +1,43 @@
 import { useState, useEffect } from 'react';
 import GameInspectionForm from './GameInspectionForm';
 import { motion, AnimatePresence } from 'framer-motion';
+import { storage, databases, Query } from '../lib/appwrite';
 
 function Course({ course }) {
+	const [gameImages, setGameImages] = useState({});
 	const [modalView, setModalView] = useState(null); // null | 'course' | 'game'
 	const [selectedGame, setSelectedGame] = useState(null);
+
+	const fetchGameDocs = async () => {
+		try {
+			const res = await databases.listDocuments(
+				import.meta.env.VITE_APPWRITE_DATABASE_ID,
+				import.meta.env.VITE_APPWRITE_COURSE_COLLECTION_ID,
+				[Query.equal('courseId', course.id)]
+			);
+
+			const images = {};
+			for (const doc of res.documents) {
+				if (doc.imageId) {
+					const preview = storage.getFilePreview(
+						import.meta.env.VITE_APPWRITE_GAME_IMAGES,
+						doc.imageId
+					);
+					console.log(`Game ${doc.gameNumber} image URL:`, preview.href);
+
+					images[doc.gameNumber] = preview.href;
+				}
+			}
+
+			setGameImages(images);
+		} catch (err) {
+			console.error('Error fetching game images:', err);
+		}
+	};
+
+	useEffect(() => {
+		if (modalView === 'course') fetchGameDocs();
+	}, [modalView, course.id]);
 
 	const openCourseModal = () => {
 		setModalView('course');
@@ -65,6 +98,12 @@ function Course({ course }) {
 												className='game-card'
 												onClick={() => openGameModal(game)}>
 												Game {game}
+												{gameImages[game] && (
+													<img
+														src={gameImages[game]}
+														alt={`Game ${game}`}
+													/>
+												)}
 											</li>
 										))}
 									</ul>
@@ -84,6 +123,7 @@ function Course({ course }) {
 									<GameInspectionForm
 										courseId={course.id}
 										gameNumber={selectedGame}
+										onImageUploadComplete={fetchGameDocs}
 									/>
 									<button onClick={() => setModalView('course')}>
 										Back to Games

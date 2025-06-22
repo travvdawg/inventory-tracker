@@ -15,7 +15,7 @@ const ManageHarnessStatus = ({ closeModal }) => {
 					HARNESS_COLLECTION,
 					[Query.limit(200)]
 				);
-				console.log('Harness documents:', res.documents);
+				// console.log('Harness documents:', res.documents);
 				setHarnesses(res.documents);
 			} catch (err) {
 				console.error('Error fetching harnesses:', err);
