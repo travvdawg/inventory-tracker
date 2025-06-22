@@ -14,13 +14,13 @@ function Harnesses() {
 	const [activeModal, setActiveModal] = useState(null);
 	const [harnesses, setHarnesses] = useState([]);
 
-	console.log(
-		harnesses.map((h) => ({
-			id: h.$id,
-			number: h.HarnessNumber,
-			status: h.Status,
-		}))
-	);
+	// console.log(
+	// 	harnesses.map((h) => ({
+	// 		id: h.$id,
+	// 		number: h.HarnessNumber,
+	// 		status: h.Status,
+	// 	}))
+	// );
 
 	useEffect(() => {
 		const fetchHarnesses = async () => {
