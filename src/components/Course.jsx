@@ -19,7 +19,7 @@ function Course({ course }) {
 			const images = {};
 			for (const doc of res.documents) {
 				if (doc.imageId) {
-					const preview = storage.getFilePreview(
+					const preview = storage.getFileView(
 						import.meta.env.VITE_APPWRITE_GAME_IMAGES,
 						doc.imageId
 					);
